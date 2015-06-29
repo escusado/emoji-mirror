@@ -4,8 +4,33 @@
   <meta charset="UTF-8">
   <title>Emoji-mirror</title>
 
-  <script src="bower_components/neon/neon.js"></script>
-  <script src="bower_components/neon/stdlib/index.js"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="bower_components/pixi.js/bin/pixi.min.js"></script>
+  <script src="bower_components/neon/neon-stdlib.min.js"></script>
+  <script src="assets/js/pixi-app.js"></script>
+
+  <script>
+
+    function ready(fn) {
+      if (document.readyState != 'loading'){
+        fn();
+      } else {
+        document.addEventListener('DOMContentLoaded', fn);
+      }
+    }
+
+    //Kickstart on Document Ready
+    ready(function(){
+      window.app = new PixiApp({
+        backgroundColor : 0x00FF00
+      });
+      window.app.render(document.body);
+      window.app.setup();
+      window.app.animate.call(window.app); //call first animation update
+    });
+
+  </script>
 
 </head>
 <body>
