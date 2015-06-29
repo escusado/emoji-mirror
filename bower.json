@@ -1,0 +1,12 @@
+{
+  "name": "Emoji-Mirror",
+  "description": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "neon": "git@github.com:escusado/neon.git"
+  }
+}
