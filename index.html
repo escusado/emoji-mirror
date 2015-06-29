@@ -9,6 +9,7 @@
   <script src="bower_components/pixi.js/bin/pixi.min.js"></script>
   <script src="bower_components/neon/neon-stdlib.min.js"></script>
   <script src="assets/js/pixi-app.js"></script>
+  <script src="assets/js/app.js"></script>
 
   <script>
 
@@ -22,12 +23,21 @@
 
     //Kickstart on Document Ready
     ready(function(){
-      window.app = new PixiApp({
-        backgroundColor : 0x00FF00
+      window.pixiApp = new PixiApp({
+        backgroundColor : 0x00FF00,
+        // view : document.body,
+        // transparent : false,
+        antialias : true,
+        // preserveDrawingBuffer : false,
+        // resolution : 2
       });
-      window.app.render(document.body);
-      window.app.setup();
-      window.app.animate.call(window.app); //call first animation update
+
+
+      window.app = new App();
+
+      window.pixiApp.render(document.body);
+      window.pixiApp.setup();
+      window.pixiApp.animate.call(window.pixiApp); //call first animation update
     });
 
   </script>

@@ -1,6 +1,6 @@
 Class('PixiApp').inherits(Widget)({
 
-  ELEMENT_CLASS: 'pixi-stage',
+  ELEMENT_CLASS: 'pixi-stage-container',
 
   prototype : {
     init : function(config){
@@ -11,7 +11,7 @@ Class('PixiApp').inherits(Widget)({
         h : window.innerHeight
       };
 
-      this.renderer = PIXI.autoDetectRenderer(this.size.w, this.size.h, {backgroundColor : this.backgroundColor});
+      this.renderer = PIXI.autoDetectRenderer(this.size.w, this.size.h, config);
       this.element.appendChild(this.renderer.view);
 
       this.stage = new PIXI.Container();
@@ -20,7 +20,8 @@ Class('PixiApp').inherits(Widget)({
     setup : function setup(){
       this.dispatch('setup',{
         data : {
-          stage : this.stage
+          stage : this.stage,
+          size : this.size
         }
       });
     },
