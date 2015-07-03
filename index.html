@@ -9,6 +9,8 @@
   <script src="bower_components/pixi.js/bin/pixi.min.js"></script>
   <script src="bower_components/neon/neon-stdlib.min.js"></script>
   <script src="assets/js/pixi-app.js"></script>
+  <script src="assets/js/webcam.js"></script>
+  <script src="assets/js/mirror.js"></script>
   <script src="assets/js/app.js"></script>
 
   <script>
@@ -34,6 +36,7 @@
 
 
       window.app = new App();
+      window.app.render(document.body);
 
       window.pixiApp.render(document.body);
       window.pixiApp.setup();
