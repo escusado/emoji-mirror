@@ -1,0 +1,16 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+.clearfix{
+  clear: both
+}
+
+ul, li {
+  list-style: none;
+}
+
+.disabled {
+  pointer-events:none;
+}
