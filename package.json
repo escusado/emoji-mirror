@@ -16,6 +16,8 @@
     "express": "^4.15.4",
     "html-webpack-plugin": "2.30.1",
     "node-sass": "4.5.3",
+    "pixi.js": "^4.7.1",
+    "play-sound": "^1.1.2",
     "react": "15.6.1",
     "react-dom": "^15.6.1",
     "sass-loader": "6.0.6",

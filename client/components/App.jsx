@@ -1,5 +1,6 @@
 import React from 'react';
-const Chroma = require('chroma-js');
+import Camera from './Camera.jsx';
+import Mirror from './Mirror.jsx';
 
 export default class App extends React.Component {
 
@@ -12,7 +13,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div  className="app">
-        Wattup
+        <Mirror />
+        <Camera />
       </div>
     );
   }
