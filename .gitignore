@@ -16,3 +16,4 @@ rsync-exclude
 node_modules
 bower_components
 dist/
+emojis/*.png

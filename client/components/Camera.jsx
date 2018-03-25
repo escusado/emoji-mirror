@@ -1,4 +1,5 @@
 import React from 'react';
+const Config = require('../../config.json');
 
 export default class Camera extends React.Component {
 
@@ -29,24 +30,15 @@ export default class Camera extends React.Component {
         let b = data[index + 2];
         let a = data[index + 3];
         result.push({x,y,r,g,b,a});
-
-        // result.push({
-        //   x: x,
-        //   y: y,
-        //   r: data[4 * (y * width + x)],
-        //   g: data[4 * (y * width + x) + 1],
-        //   b: data[4 * (y * width + x) + 2],
-        //   a: data[4 * (y * width + x) + 3]
-        // })
       }
     }
     return result;
   }
 
   updateFrame () {
-    this.backCanvas.getContext('2d').drawImage(this.videoEl, 0, 0, 64, 48);
-    var apx = this.backCanvas.getContext('2d').getImageData(0, 0, 64, 48);
-    const arrayData = this.canvasDataToArray(apx.data, 64, 48);
+    this.backCanvas.getContext('2d').drawImage(this.videoEl, 0, 0, Config.width, Config.height);
+    var apx = this.backCanvas.getContext('2d').getImageData(0, 0, Config.width, Config.height);
+    const arrayData = this.canvasDataToArray(apx.data, Config.width, Config.height);
     const data = arrayData.map(el => {
       return {
         x: el.x,
@@ -65,8 +57,8 @@ export default class Camera extends React.Component {
   render() {
     return (
       <div  className="camera">
-        <canvas id="backCanvas" width="64" height="48" ref={(backCanvas) => { this.backCanvas = backCanvas; }}></canvas>
-        <video id="video" width="64" height="48" ref={(videoEl) => { this.videoEl = videoEl; }}></video>
+        <canvas id="backCanvas" width={Config.width} height={Config.height} ref={(backCanvas) => { this.backCanvas = backCanvas; }}></canvas>
+        <video id="video" width={Config.width} height={Config.height} ref={(videoEl) => { this.videoEl = videoEl; }}></video>
       </div>
     );
   }
