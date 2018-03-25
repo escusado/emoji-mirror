@@ -15,6 +15,9 @@ export default class App extends React.Component {
       <div  className="app">
         <Mirror />
         <Camera />
+        <div className="header">
+          <img src="./logo.png" />
+        </div>
       </div>
     );
   }

@@ -40,15 +40,16 @@ export default class Mirror extends React.Component {
         this.emojisLoaded = true;
     });
 
+    // const logo = new PIXI.Sprite.fromImage('../../logo.png');
+    // logo.x = 10;
+    // logo.y = 10;
+    // logo.scale = 0.2;
+    // this.app.stage.addChild(logo);
+
     this.colorScale = Chroma.scale(['#FF0014','#FF6813', '#FBF992', '#5CCA40', '#0091D2', '#A800E6', '#FF0014']).mode('lch').colors(256)
     this.colorScale = Chroma.scale(["#ff0000", "#ffa500", "#ffff00", "#00ff00", "#0000ff", "#ff0000"]).mode('lch').colors(256)
     this.currentTintColor = this.colorScale[0];
     this.currentTintIndex = 0;
-
-
-
-
-
   }
 
   handleResize () {

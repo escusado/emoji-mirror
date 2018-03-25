@@ -15,7 +15,12 @@ ul, li {
   pointer-events:none;
 }
 
-// #backCanvas,
-// #video{
-//   display: none;
-// }
+.header{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  img {
+    width: 200px;
+  }
+}
