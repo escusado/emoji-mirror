@@ -5,8 +5,9 @@ import Events from 'events';
 const EventEmitter = Events.EventEmitter;
 
 require('./scss/index.scss');
-import emojis from '../emojis/list.json';
-window.emojis = emojis;
+
+import Emojis from '../emojis/list.json';
+window.Emojis = Emojis;
 
 window.Mediator = new EventEmitter();
 ReactDOM.render(<App />, document.getElementById('root'));
