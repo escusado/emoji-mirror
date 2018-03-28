@@ -5,13 +5,8 @@ const NearestColor = require('nearest-color');
 
 export default class Mirror extends React.Component {
 
-  constructor (props) {
-    super(props);
-
-    this.state = {};
-  }
-
   componentDidMount () {
+
     window.Mediator.on('camera-update', this.handleCameraUpdate.bind(this));
     window.addEventListener("resize", this.handleResize.bind(this));
 
@@ -26,37 +21,32 @@ export default class Mirror extends React.Component {
     this.canvasEl.appendChild(this.app.view);
     this.mirrorContainer = new PIXI.Container();
     this.app.stage.addChild(this.mirrorContainer);
-    this.colorList = NearestColor.from(Object.keys(window.emojis));
+    this.colorList = NearestColor.from(Object.keys(window.Emojis));
 
     this.emojisLoaded = false;
-    this.resources;
     let loader = new PIXI.loaders.Loader();
-    Object.keys(window.emojis).forEach((color)=>{
-      loader.add(color, '../emojis/' + window.emojis[color]);
+    Object.keys(window.Emojis).forEach( (color) => {
+      loader.add(color, '../emojis/' + window.Emojis[color]);
     });
     loader.load((loader, resources) => {
-        console.log('emojis loading complete');
+        console.log('Emojis loaded');
         this.resources = resources;
         this.emojisLoaded = true;
     });
 
-    // const logo = new PIXI.Sprite.fromImage('../../logo.png');
-    // logo.x = 10;
-    // logo.y = 10;
-    // logo.scale = 0.2;
-    // this.app.stage.addChild(logo);
-
-    this.colorScale = Chroma.scale(['#FF0014','#FF6813', '#FBF992', '#5CCA40', '#0091D2', '#A800E6', '#FF0014']).mode('lch').colors(256)
-    this.colorScale = Chroma.scale(["#ff0000", "#ffa500", "#ffff00", "#00ff00", "#0000ff", "#ff0000"]).mode('lch').colors(256)
+    // this.colorScale = Chroma.scale(['#FF0014','#FF6813', '#FBF992', '#5CCA40', '#0091D2', '#A800E6', '#FF0014']).mode('lch').colors(256)
+    this.colorScale = Chroma.scale(["#ff0000", "#ffa500", "#ffff00", "#00ff00", "#0000ff", "#ff0000"]).mode('lch').colors(256);
     this.currentTintColor = this.colorScale[0];
     this.currentTintIndex = 0;
   }
 
   handleResize () {
+
     this.app.renderer.resize(window.innerWidth, window.innerHeight);
   }
 
   handleCameraUpdate (e){
+
     const sourceRes = {
       width: e.data[e.data.length-1].x+1,
       height: e.data[e.data.length-1].y+1
@@ -67,7 +57,7 @@ export default class Mirror extends React.Component {
     this.mirrorContainer = new PIXI.Container();
     this.app.stage.addChild(this.mirrorContainer);
 
-    e.data.map((pixel, index)=>{
+    e.data.map( (pixel, index) => {
       let tile;
       if(this.emojisLoaded){
         tile = this.getEmoji(pixel, tileSize, this.colorScale[this.currentTintIndex]);
@@ -85,6 +75,7 @@ export default class Mirror extends React.Component {
   }
 
   getTile(pixel, tileSize){
+
     let tileColor = [pixel.color.r, pixel.color.g, pixel.color.g];
     let hexColor = PIXI.utils.rgb2hex(Chroma(tileColor).gl());
     let rgbColor = '#'+hexColor;
@@ -95,6 +86,7 @@ export default class Mirror extends React.Component {
   }
 
   getEmoji(pixel, tileSize, tintColor){
+
     let tileColor = [pixel.color.r, pixel.color.g, pixel.color.g];
     tileColor = Chroma(tileColor).hex();
     if(tintColor){
@@ -121,11 +113,8 @@ export default class Mirror extends React.Component {
   }
 
   render() {
-    return (
-      <div  className="mirror" ref={(canvasEl) => { this.canvasEl = canvasEl; }}>
-
-      </div>
-    );
+    
+    return (<div  className="mirror" ref={(canvasEl) => { this.canvasEl = canvasEl; }}></div>);
   }
 
 }

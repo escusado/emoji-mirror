@@ -3,11 +3,6 @@ const Config = require('../../config.json');
 
 export default class Camera extends React.Component {
 
-  constructor (props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount(){
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -16,11 +11,11 @@ export default class Camera extends React.Component {
         this.videoEl.play();
       });
     }
-
     window.requestAnimationFrame(this.updateFrame.bind(this));
   }
 
   canvasDataToArray(data, width, height) {
+
     const result = []
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < width; x++) {
@@ -36,8 +31,9 @@ export default class Camera extends React.Component {
   }
 
   updateFrame () {
-    this.backCanvas.getContext('2d').drawImage(this.videoEl, 0, 0, Config.width, Config.height);
-    var apx = this.backCanvas.getContext('2d').getImageData(0, 0, Config.width, Config.height);
+
+    this.backCanvasEl.getContext('2d').drawImage(this.videoEl, 0, 0, Config.width, Config.height);
+    var apx = this.backCanvasEl.getContext('2d').getImageData(0, 0, Config.width, Config.height);
     const arrayData = this.canvasDataToArray(apx.data, Config.width, Config.height);
     const data = arrayData.map(el => {
       return {
@@ -55,9 +51,10 @@ export default class Camera extends React.Component {
   }
 
   render() {
+
     return (
       <div  className="camera">
-        <canvas id="backCanvas" width={Config.width} height={Config.height} ref={(backCanvas) => { this.backCanvas = backCanvas; }}></canvas>
+        <canvas id="backCanvasEl" width={Config.width} height={Config.height} ref={(backCanvasEl) => { this.backCanvasEl = backCanvasEl; }}></canvas>
         <video id="video" width={Config.width} height={Config.height} ref={(videoEl) => { this.videoEl = videoEl; }}></video>
       </div>
     );
