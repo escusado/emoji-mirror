@@ -6,40 +6,50 @@ pixel tiles.
 
 [DEMO]
 
-The project was born in the @HackerGarage's 7th birthday Hacker of the Year Hackathon,
+The project was born in the @[HackerGarage](https://www.facebook.com/hackergarage/)'s 7th birthday Hacker of the Year Hackathon,
 in which the objective was to build something useless.
+
+This project uses:
+- https://github.com/javierbyte/points/
+- https://www.npmjs.com/package/nearest-color/
+- https://gka.github.io/chroma.js/
+- https://reactjs.org/
+- https://webpack.js.org/
+- https://www.pixijs.com/
+- https://sass-lang.com/
+- https://nodejs.org/
 
 Interested in the inner workings? go ahead...
 
 ## How to Run
 - clone or download this repo
 - unzip `emojis/emojis.zip`
-- `npm install`
+- `npm install` (auto webpack build happens)
 - `node server.js`
 - point your browser to: `http://localhost:8080`
 
-## Problem
+# Problem
 Draw a grid of emojis representing the colors obtained from the webcam.
 
-### Background
+## Background
 There are a lot of "Mosaic" renderers out there, mainly for poster or still images
 creation:
 
-https://github.com/codebox/mosaic
-https://github.com/keijiro/PhotoMosaic
-https://github.com/gustavomazzoni/photo-mosaic
+- https://github.com/codebox/mosaic
+- https://github.com/keijiro/PhotoMosaic
+- https://github.com/gustavomazzoni/photo-mosaic
 
 I wanted to pass a webcam still image to obtain a video stream rendered with emojis
 instead of pixels.
 
-### Constraints
+## Constraints
 - It should run in the browser
 - It should resemblance the original input (as in it has to kinda look like it)
 
-### Assumptions
+## Assumptions
 - The user will grant webcam access on its browser
 
-### Solution Proposal
+## Solution Proposal
 The problem can be divided into 3 different sub problems
 - Obtain a list of Emojis and its most representative color.
 - Obtain a low-res webcam image stream, and inspect each pixel color.
@@ -49,7 +59,7 @@ I'm creating a web-app that uses `React` as the app framework, this will render
 a `pixi.js` `<canvas/>` to draw each emoji grid frame. The grid should be fed
 a color grid that represents the webcam stream.
 
-#### Get the Emojis
+### 1) Get the Emojis
 The idea is to first create the emoji list, for the convenience of this project
 I've added a pre-made `emojis/emojis.zip` file that contains the list of apple
 standard emoji list.
@@ -75,7 +85,7 @@ png files inside the `emojis/` folder.
 Later I load the `list.json` file as the `window.Emojis` global variable inside
 `client/index.jsx`.
 
-#### Get the webcam colors grid
+### 2) Get the webcam colors grid
 For this we use the browsers webcam API, this is a simple `React` component
 `client/components/Camera.jsx` which:
 - Render a `<canvas/>` node called `backCanvasEl`
@@ -101,7 +111,7 @@ For this we use the browsers webcam API, this is a simple `React` component
 ```
 - this array uses the `Mediator` to emit an `camera-update` event with the array as its data.
 
-#### Render the mirror
+### 3) Render the mirror
 With the `window.Emojis` list available and the camera webcam stream already as a
 color grid available as the `camera-update` event I created the `client/components/Mirror.jsx` which:
 - On mount binds to the `camera-update` event handled by `handleCameraUpdate`
