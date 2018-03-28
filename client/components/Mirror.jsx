@@ -53,7 +53,7 @@ export default class Mirror extends React.Component {
       height: e.data[e.data.length-1].y+1
     };
 
-    const tileSize = Math.floor(window.innerWidth / sourceRes.width );
+    const tileSize = Math.ceil(window.innerWidth / sourceRes.width );
     this.mirrorContainer.destroy();
     this.mirrorContainer = new PIXI.Container();
     this.app.stage.addChild(this.mirrorContainer);
