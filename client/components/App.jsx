@@ -8,9 +8,9 @@ export default class App extends React.Component {
     return (
       <div  className="app">
 
-        <div className="header">
-          
-        </div>
+        <a href="https://github.com/escusado/emoji-mirror">
+          <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Tenedoreame en GitHub">
+        </a>
 
         <Mirror />
         <Camera />
