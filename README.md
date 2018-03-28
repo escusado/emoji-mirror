@@ -2,7 +2,7 @@
 A `pixi.js` based grid to render low-res webcam images using emojis instead of
 pixel tiles.
 
-[Screenshot]
+![Emoji Mirror](https://media.giphy.com/media/5tdd338KRo0q0183NX/giphy.gif)
 
 [DEMO]
 
@@ -126,6 +126,9 @@ method.
 After experimentation I decided to add a color transition between frames, this
 helps to rotate the emojis that are shown on the grid and to draw them over a
 tile of the color it represents, this helps making the image look better.
+
+## Notes
+- `config.json` sets the low-res resolution
 
 ## Further Improvements
 - Automate tile set creation

@@ -4,14 +4,17 @@ import Mirror from './Mirror.jsx';
 
 export default class App extends React.Component {
   render() {
-    
+
     return (
       <div  className="app">
+
+        <div className="header">
+          
+        </div>
+
         <Mirror />
         <Camera />
-        <div className="header">
-          <img src="./logo.png" />
-        </div>
+
       </div>
     );
   }
