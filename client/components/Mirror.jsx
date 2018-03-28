@@ -35,7 +35,8 @@ export default class Mirror extends React.Component {
     });
 
     // this.colorScale = Chroma.scale(['#FF0014','#FF6813', '#FBF992', '#5CCA40', '#0091D2', '#A800E6', '#FF0014']).mode('lch').colors(256)
-    this.colorScale = Chroma.scale(["#ff0000", "#ffa500", "#ffff00", "#00ff00", "#0000ff", "#ff0000"]).mode('lch').colors(256);
+    // this.colorScale = Chroma.scale(["#ff0000", "#ffa500", "#ffff00", "#00ff00", "#0000ff", "#ff0000"]).mode('lch').colors(256);
+    this.colorScale = Chroma.scale(["#9400D3", "#4B0082", "#0000FF", "#00FF00", "#FFFF00", "#FF7F00", "FF0000", "9400D3"]).mode('lch').colors(256);
     this.currentTintColor = this.colorScale[0];
     this.currentTintIndex = 0;
   }
@@ -67,7 +68,7 @@ export default class Mirror extends React.Component {
       this.mirrorContainer.addChild(tile);
     });
 
-    if(this.currentTintIndex == this.colorScale.length){
+    if(this.currentTintIndex == this.colorScale.length-1){
       this.currentTintIndex = 0;
     }else{
       this.currentTintIndex++;
@@ -113,7 +114,7 @@ export default class Mirror extends React.Component {
   }
 
   render() {
-    
+
     return (<div  className="mirror" ref={(canvasEl) => { this.canvasEl = canvasEl; }}></div>);
   }
 
