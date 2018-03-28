@@ -34,7 +34,7 @@
     "canvas"
   ],
   "scripts": {
-    "postinstall": "webpack -p",
+    "postinstall": "cd emojis/ && jar xf emojis.zip && cd .. && webpack -p",
     "dev": "node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "start": "NODE_ENV=production node server.js"
   }

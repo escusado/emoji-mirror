@@ -6,7 +6,7 @@ pixel tiles.
 
 [DEMO]
 
-The project was born in the @[HackerGarage](https://www.facebook.com/hackergarage/)'s 7th birthday Hacker of the Year Hackathon,
+The project was born in the [HackerGarage](https://www.facebook.com/hackergarage/)'s 7th birthday Hacker of the Year Hackathon,
 in which the objective was to build something useless.
 
 This project uses:
@@ -23,8 +23,8 @@ Interested in the inner workings? go ahead...
 
 ## How to Run
 - clone or download this repo
-- unzip `emojis/emojis.zip`
 - `npm install` (auto webpack build happens)
+- unzip `emojis/emojis.zip` (if auto unzip fails)
 - `node server.js`
 - point your browser to: `http://localhost:8080`
 
