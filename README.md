@@ -4,7 +4,7 @@ pixel tiles.
 
 ![Emoji Mirror](https://media.giphy.com/media/5tdd338KRo0q0183NX/giphy.gif)
 
-[DEMO]
+## [DEMO](https://emoji-mirror.herokuapp.com/)
 
 The project was born in the [HackerGarage](https://www.facebook.com/hackergarage/)'s 7th birthday Hacker of the Year Hackathon,
 in which the objective was to build something useless.
