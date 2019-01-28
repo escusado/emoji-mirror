@@ -23,15 +23,15 @@ export default class Mirror extends React.Component {
     this.app.stage.addChild(this.mirrorContainer);
     this.colorList = NearestColor.from(Object.keys(window.Emojis));
 
+    this.resources = {};
     this.emojisLoaded = false;
     let loader = new PIXI.loaders.Loader();
     Object.keys(window.Emojis).forEach( (color) => {
       loader.add(color, '../emojis/' + window.Emojis[color]);
     });
-    loader.load((loader, resources) => {
-        console.log('Emojis loaded');
-        this.resources = resources;
-        this.emojisLoaded = true;
+    loader.load();
+    loader.on('load', (loader, resource)=>{
+      this.resources[resource.name] = resource;
     });
 
     // this.colorScale = Chroma.scale(['#FF0014','#FF6813', '#FBF992', '#5CCA40', '#0091D2', '#A800E6', '#FF0014']).mode('lch').colors(256)
@@ -59,12 +59,7 @@ export default class Mirror extends React.Component {
     this.app.stage.addChild(this.mirrorContainer);
 
     e.data.map( (pixel, index) => {
-      let tile;
-      if(this.emojisLoaded){
-        tile = this.getEmoji(pixel, tileSize, this.colorScale[this.currentTintIndex]);
-      }else{
-        tile = this.getTile(pixel, tileSize);
-      }
+      let tile = this.getEmoji(pixel, tileSize, this.colorScale[this.currentTintIndex]);
       this.mirrorContainer.addChild(tile);
     });
 
@@ -75,17 +70,6 @@ export default class Mirror extends React.Component {
     }
   }
 
-  getTile(pixel, tileSize){
-
-    let tileColor = [pixel.color.r, pixel.color.g, pixel.color.g];
-    let hexColor = PIXI.utils.rgb2hex(Chroma(tileColor).gl());
-    let rgbColor = '#'+hexColor;
-    var graphics = new PIXI.Graphics();
-    graphics.beginFill(hexColor);
-    graphics.drawRect(pixel.x*tileSize, pixel.y*tileSize, tileSize, tileSize);
-    return graphics;
-  }
-
   getEmoji(pixel, tileSize, tintColor){
 
     let tileColor = [pixel.color.r, pixel.color.g, pixel.color.g];
@@ -94,21 +78,25 @@ export default class Mirror extends React.Component {
       tileColor = Chroma.blend(tileColor, tintColor, 'darken').hex();
     }
     let closerColor = this.colorList(tileColor);
-    const sprite = new PIXI.Sprite(this.resources[closerColor].texture);
-    sprite.x = pixel.x*tileSize;
-    sprite.y = pixel.y*tileSize;
-    sprite.width = tileSize;
-    sprite.height = tileSize;
 
     var graphics = new PIXI.Graphics();
     let hexColor = PIXI.utils.rgb2hex(Chroma(tileColor).gl());
     graphics.beginFill(hexColor);
-    graphics.alpha = 0.5;
     graphics.drawRect(pixel.x*tileSize, pixel.y*tileSize, tileSize, tileSize);
 
     const group = new PIXI.Container();
     group.addChild(graphics);
-    group.addChild(sprite);
+
+    if(this.resources[closerColor]){
+      const sprite = new PIXI.Sprite(this.resources[closerColor].texture);
+      sprite.x = pixel.x*tileSize;
+      sprite.y = pixel.y*tileSize;
+      sprite.width = tileSize;
+      sprite.height = tileSize;
+
+      group.addChild(sprite);
+      graphics.alpha = 0.5;
+    }
 
     return group;
   }

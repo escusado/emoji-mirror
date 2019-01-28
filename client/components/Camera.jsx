@@ -7,7 +7,13 @@ export default class Camera extends React.Component {
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.videoEl.src = window.URL.createObjectURL(stream);
+
+        try {
+          this.videoEl.srcObject = stream;
+        } catch (error) {
+          this.videoEl.src = window.URL.createObjectURL(stream);
+        }
+        
         this.videoEl.play();
       });
     }
